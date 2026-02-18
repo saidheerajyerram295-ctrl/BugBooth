@@ -1,144 +1,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>BUGBOOTH – Debug the Code</title>
+  <title>BugBooth</title>
+  <style>
+    body {
+      margin: 0;
+      background: #020617;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Consolas, monospace;
-    background: radial-gradient(circle at top, #0b1630, #020617);
-    color: white;
-    text-align: center;
-}
+    h1 {
+      margin-top: 15px;
+      color: #f97316;
+    }
 
-header {
-    padding: 18px;
-    font-size: 26px;
-    font-weight: bold;
-}
+    .rules {
+      margin: 10px auto 20px;
+      font-size: 16px;
+      color: #e5e7eb;
+      font-weight: bold;
+    }
 
-.rules {
-    background: rgba(255,255,255,0.1);
-    margin: 10px auto 20px;
-    padding: 12px;
-    border-radius: 10px;
-    width: 95%;
-}
+    .container {
+      display: none;
+    }
 
-.container {
-    width: 95%;
-    margin: auto;
-}
+    .container.active {
+      display: block;
+    }
 
-.code-box {
-    display: none;
-    background: #0f172a;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: left;
-    font-size: 16px;
-    white-space: pre;
-}
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: none;
+    }
 
-button {
-    padding: 12px 25px;
-    margin: 10px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-}
+    .nav {
+      margin: 15px;
+    }
 
-.run { background: #22c55e; }
-.next { background: #f97316; }
-.prev { background: #64748b; }
+    button {
+      padding: 10px 18px;
+      margin: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: #f97316;
+      color: white;
+    }
 
-.output {
-    margin-top: 15px;
-    color: #38bdf8;
-}
-</style>
-
-<script>
-let current = 0;
-
-function showCode(i) {
-    document.querySelectorAll('.code-box').forEach(c => c.style.display = 'none');
-    document.getElementById('code' + i).style.display = 'block';
-    document.getElementById('output').innerText = "";
-}
-
-function nextCode() {
-    if (current < 2) current++;
-    showCode(current);
-}
-
-function prevCode() {
-    if (current > 0) current--;
-    showCode(current);
-}
-
-function runFake() {
-    document.getElementById('output').innerText =
-        "Program executed.\nShow output to coordinator.";
-}
-
-window.onload = () => showCode(0);
-</script>
+    button:disabled {
+      background: #475569;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>🐞 BUGBOOTH – Debug the Code 🐞</header>
+<h1>🐞 BUGBOOTH – Debug the Code 🐞</h1>
 
 <div class="rules">
-⏱ Time: 15–20 Minutes |
-❌ No Internet Search |
-❌ No Mobile Phones |
-✅ Debug Only
+  ⏱ Time: 15–20 Minutes |
+  ❌ No Internet Search |
+  ❌ No Mobile Phones |
+  ✅ Debug Only
 </div>
 
-<h2>Fix the bugs and run the program</h2>
-
-<div class="container">
-
-<div id="code0" class="code-box">
-nums = [1, 2, 3, 4, 5]
-
-for n in nums:
-    if n % 2 == 0:
-        nums.remove(n)
-
-print(nums)
+<!-- CODE 1 -->
+<div class="container active" id="code1">
+  <iframe src="https://onecompiler.com/embed/python?code=biA9IGludChpbnB1dCgiRW50ZXIgYSBudW1iZXI6ICIpKQpzdW0gPSAwCmZvciBpIGluIHJhbmdlKDEsIG4pOgogICAgc3VtID0gc3VtICsgaQpwcmludCgiU3VtIGlzIiwgc3VtKQ=="></iframe>
 </div>
 
-<div id="code1" class="code-box">
-student = {
-    "name": "Dheeraj",
-    "age": 21
-}
-
-print(student["marks"])
+<!-- CODE 2 -->
+<div class="container" id="code2">
+  <iframe src="https://onecompiler.com/embed/python?code=biA9IGludChpbnB1dCgiRW50ZXIgbiA6ICIpKQpmYWN0ID0gMQpmb3IgaSBpbiByYW5nZSgxLCBuKToKICAgIGZhY3QgPSBmYWN0ICogaQpwcmludCgiRmFjdG9yaWFsIiwgZmFjdCk="></iframe>
 </div>
 
-<div id="code2" class="code-box">
-def average(numbers):
-    total = 0
-    for n in numbers:
-        total += n
-        return total / len(numbers)
-
-print(average([10, 20, 30, 40]))
+<!-- CODE 3 -->
+<div class="container" id="code3">
+  <iframe src="https://onecompiler.com/embed/python?code=biA9IGludChpbnB1dCgiRW50ZXIgbiA6ICIpKQppZiBuICUgMiA9PSAwOgogICAgcHJpbnQoIk9kZCIpCmVsc2U6CiAgICBwcmludCgiRXZlbiIp"></iframe>
 </div>
 
-<button class="prev" onclick="prevCode()">← Previous</button>
-<button class="run" onclick="runFake()">Run</button>
-<button class="next" onclick="nextCode()">Next →</button>
-
-<div id="output" class="output"></div>
-
+<!-- CODE 4 : BUGGY CODE -->
+<div class="container" id="code4">
+  <iframe src="https://onecompiler.com/embed/python?code=YSB9IGludChpbnB1dCgiRW50ZXIgYSI6ICIpKQpiID0gaW50KGlucHV0KCJFbnRlciBiOiAiKSkKYyA9IGludChpbnB1dCgiRW50ZXIgYzogIikpCgpifCBhID4gYiBhbmQgYSA+IGM6CiAgICBwcmludCgiTGFyZ2VzdCBpcyIsIGIpCmVsc2U6CiAgICBwcmludCgiTGFyZ2VzdCBpcyIsIGMp"></iframe>
 </div>
+
+<div class="nav">
+  <button onclick="prev()" id="prevBtn" disabled>⬅ Previous</button>
+  <button onclick="next()" id="nextBtn">Next ➡</button>
+</div>
+
+<script>
+  let current = 1;
+  const total = 4;
+
+  function show(step) {
+    for (let i = 1; i <= total; i++) {
+      document.getElementById("code" + i).classList.remove("active");
+    }
+    document.getElementById("code" + step).classList.add("active");
+
+    document.getElementById("prevBtn").disabled = step === 1;
+    document.getElementById("nextBtn").disabled = step === total;
+  }
+
+  function next() {
+    if (current < total) {
+      current++;
+      show(current);
+    }
+  }
+
+  function prev() {
+    if (current > 1) {
+      current--;
+      show(current);
+    }
+  }
+</script>
 
 </body>
 </html>
