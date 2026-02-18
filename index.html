@@ -80,27 +80,13 @@
     <!-- Question 1 -->
     <div class="compiler-container">
         <iframe 
-            src="https://onecompiler.com/embed/python?code=def%20average(numbers)%3A%0A%20%20%20%20total%20%3D%200%0A%20%20%20%20for%20n%20in%20numbers%3A%0A%20%20%20%20%20%20%20%20total%20%2B%3D%20n%0A%20%20%20%20%20%20%20%20return%20total%20%2F%20len(numbers)%0A%0Aprint(average(%5B10%2C20%2C30%2C40%5D))">
-        </iframe>
-    </div>
-
-    <!-- Question 2 -->
-    <div class="compiler-container">
-        <iframe 
-            src="https://onecompiler.com/embed/python?code=def%20count_even(nums)%3A%0A%20%20%20%20count%20%3D%200%0A%20%20%20%20for%20i%20in%20range(1%2C%20len(nums))%3A%0A%20%20%20%20%20%20%20%20if%20nums%5Bi%5D%20%25%202%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20count%20%2B%3D%201%0A%20%20%20%20return%20count%0A%0Aprint(count_even(%5B2%2C4%2C6%2C8%5D))">
-        </iframe>
-    </div>
-
-    <!-- Question 3 -->
-    <div class="compiler-container">
-        <iframe 
-            src="https://onecompiler.com/embed/python?code=def%20max_value(arr)%3A%0A%20%20%20%20max%20%3D%200%0A%20%20%20%20for%20x%20in%20arr%3A%0A%20%20%20%20%20%20%20%20if%20x%20%3E%20max%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20max%20%3D%20x%0A%20%20%20%20return%20max%0A%0Aprint(max_value(%5B-5%2C-2%2C-10%5D))">
+            src="https://onecompiler.com/embed/python?code=%23%20Python%20program%20to%20add%20two%20numbers%0Anum1%20%3D%2018%0Anum2%20%3D%207%0A%0A%23%20Adding%20two%20numbers%0Asum%20%3D%20num1%20%2B%20num2%0A%0A%23%20Printing%20the%20result%20using%20an%20f-string%0Aprint(f%22Sum%20of%20%7Bnum1%7D%20and%20%7Bnum2%7D%20is%20%7Bsum%7D%22)">
         </iframe>
     </div>
 
     <div class="nav-buttons">
-        <button id="prevBtn" onclick="changeQuestion(-1)">⬅ Previous</button>
-        <button id="nextBtn" onclick="changeQuestion(1)">Next ➡</button>
+        <button id="prevBtn" disabled>⬅ Previous</button>
+        <button id="nextBtn" disabled>Next ➡</button>
     </div>
 
     <footer>
@@ -108,25 +94,8 @@
     </footer>
 
     <script>
-        let current = 0;
-        const questions = document.querySelectorAll(".compiler-container");
-        const prevBtn = document.getElementById("prevBtn");
-        const nextBtn = document.getElementById("nextBtn");
-
-        function showQuestion(index) {
-            questions.forEach(q => q.style.display = "none");
-            questions[index].style.display = "block";
-
-            prevBtn.disabled = index === 0;
-            nextBtn.disabled = index === questions.length - 1;
-        }
-
-        function changeQuestion(step) {
-            current += step;
-            showQuestion(current);
-        }
-
-        showQuestion(current);
+        const question = document.querySelector(".compiler-container");
+        question.style.display = "block";
     </script>
 
 </body>
