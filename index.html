@@ -5,68 +5,130 @@
 <title>BUGBOOTH – Debug the Code</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #0b1220;
-        color: #ffffff;
-        text-align: center;
-    }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1220;
+    color: white;
+    text-align: center;
+  }
 
-    h1 {
-        margin: 20px 0 10px;
-        color: #ff9800;
-        font-size: 32px;
-    }
+  h1 {
+    font-size: 42px;
+    margin-top: 30px;
+  }
 
-    .rules {
-        background: #111a2e;
-        padding: 12px;
-        margin: 10px auto 20px;
-        width: 90%;
-        border-radius: 8px;
-        font-size: 16px;
-    }
+  h2 {
+    color: #38bdf8;
+  }
 
-    .editor-box {
-        width: 95%;
-        margin: auto;
-        border: 2px solid #ff9800;
-        border-radius: 10px;
-        overflow: hidden;
-        background: #fff;
-    }
+  .rules {
+    font-size: 18px;
+    margin-top: 15px;
+    line-height: 1.7;
+  }
 
-    footer {
-        margin: 20px;
-        font-size: 14px;
-        color: #aaa;
-    }
+  .page {
+    display: none;
+    margin-top: 25px;
+  }
+
+  iframe {
+    width: 90%;
+    height: 420px;
+    border: none;
+    border-radius: 12px;
+    margin-top: 15px;
+    background: white;
+  }
+
+  button {
+    margin-top: 25px;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #22c55e;
+    color: black;
+  }
+
+  button:hover {
+    background: #16a34a;
+  }
+
+  footer {
+    margin: 40px 0 20px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
 </style>
 </head>
 
 <body>
 
-<h1>🐞 BUGBOOTH – Debug the Code 🐞</h1>
+<!-- INTRO / RULES PAGE -->
+<div id="intro">
+  <h1>🐞 BUGBOOTH – Debug the Code</h1>
 
-<div class="rules">
-⏱ Time: 15–20 Minutes |
-❌ No Internet Search |
-❌ No Mobile Phones |
-✅ Debug Only
+  <div class="rules">
+    ⏱ Time: 15–20 Minutes <br>
+    ❌ No Internet Search <br>
+    ❌ No Mobile Phones <br>
+    ✅ Debug Only <br><br>
+    <b>Game will start automatically...</b>
+  </div>
 </div>
 
-<!-- JDoodle Embed START -->
-<div class="editor-box">
-    <div data-pym-src="https://www.jdoodle.com/embed/v1/e969a130536366b7"></div>
+<!-- PAGE 1 -->
+<div id="page1" class="page">
+  <h2>Level 1 – Python Bug</h2>
+  <p>Fix the bug and run the code</p>
+
+  <!-- YOUR EMBED LINK ADDED HERE -->
+  <iframe 
+    src="https://onecompiler.com/embed/python/44dy8pgkw">
+  </iframe>
+
+  <button onclick="goToPage(2)">Next Level ➡️</button>
 </div>
 
-<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js"></script>
-<!-- JDoodle Embed END -->
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+  <h2>Level 2 – Coming Soon</h2>
+  <p>Next buggy code will appear here</p>
+
+  <button onclick="goToPage(3)">Next Level ➡️</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+  <h2>Final Level – Completed</h2>
+  <p>You have reached the end of BUGBOOTH</p>
+
+  <button onclick="finishGame()">Finish Game 🎉</button>
+</div>
 
 <footer>
-Debug logical errors only • BUGBOOTH Event
+  BUGBOOTH © Debugging Event
 </footer>
+
+<script>
+  // Auto start game after 3 seconds
+  setTimeout(() => {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("page1").style.display = "block";
+  }, 3000);
+
+  function goToPage(pageNumber) {
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById("page" + pageNumber).style.display = "block";
+  }
+
+  function finishGame() {
+    alert("🎉 Congratulations! You completed BUGBOOTH!");
+  }
+</script>
 
 </body>
 </html>
