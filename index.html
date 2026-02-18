@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BugBooth – Debug the Code</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #020617, #020617);
+    color: white;
+    text-align: center;
+  }
+
+  header {
+    padding: 18px;
+    font-size: 26px;
+    font-weight: bold;
+    background: #020617;
+  }
+
+  .rules {
+    margin: 15px auto;
+    width: 92%;
+    background: #1e293b;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  .container {
+    display: none;
+  }
+
+  .container.active {
+    display: block;
+  }
+
+  iframe {
+    width: 95%;
+    height: 70vh;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  .nav {
+    margin: 15px;
+  }
+
+  button {
+    padding: 10px 22px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: #f97316;
+    color: white;
+  }
+
+  button:disabled {
+    background: #475569;
+    cursor: not-allowed;
+  }
+
+  footer {
+    margin: 15px;
+    font-size: 14px;
+    color: #cbd5f5;
+  }
+</style>
+</head>
+
+<body>
+
+<header>🐞 BUGBOOTH – Debug the Code 🐞</header>
+
+<div class="rules">
+  ⏱ Time: 15–20 Minutes &nbsp; | &nbsp;
+  ❌ No Internet Search &nbsp; | &nbsp;
+  ❌ No Mobile Phones &nbsp; | &nbsp;
+  ✅ Debug Only
+</div>
+
+<h2>Fix the bugs and run the program</h2>
+
+<!-- CODE 1 -->
+<div class="container active" id="code1">
+  <iframe src="https://www.jdoodle.com/embed/v1/1Qfk"></iframe>
+</div>
+
+<!-- CODE 2 -->
+<div class="container" id="code2">
+  <iframe src="https://www.jdoodle.com/embed/v1/1Qfm"></iframe>
+</div>
+
+<!-- CODE 3 -->
+<div class="container" id="code3">
+  <iframe src="https://www.jdoodle.com/embed/v1/1Qfn"></iframe>
+</div>
+
+<div class="nav">
+  <button onclick="prev()" id="prevBtn" disabled>⬅ Previous</button>
+  <button onclick="next()" id="nextBtn">Next ➡</button>
+</div>
+
+<footer>
+  Show successful output to the coordinator
+</footer>
+
+<script>
+  let current = 1;
+  const total = 3;
+
+  function show(step) {
+    for (let i = 1; i <= total; i++) {
+      document.getElementById("code" + i).classList.remove("active");
+    }
+    document.getElementById("code" + step).classList.add("active");
+
+    document.getElementById("prevBtn").disabled = step === 1;
+    document.getElementById("nextBtn").disabled = step === total;
+  }
+
+  function next() {
+    if (current < total) {
+      current++;
+      show(current);
+    }
+  }
+
+  function prev() {
+    if (current > 1) {
+      current--;
+      show(current);
+    }
+  }
+</script>
+
+</body>
+</html>
