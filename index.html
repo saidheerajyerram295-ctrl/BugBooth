@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>BUGBOOTH – Debug the Code</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Consolas, monospace;
     background: radial-gradient(circle at top, #0b1630, #020617);
-    color: #ffffff;
+    color: white;
     text-align: center;
 }
 
@@ -20,11 +19,11 @@ header {
 }
 
 .rules {
-    background: rgba(255,255,255,0.08);
-    margin: 10px auto 25px;
-    padding: 14px;
-    border-radius: 12px;
-    width: 90%;
+    background: rgba(255,255,255,0.1);
+    margin: 10px auto 20px;
+    padding: 12px;
+    border-radius: 10px;
+    width: 95%;
 }
 
 .container {
@@ -32,39 +31,61 @@ header {
     margin: auto;
 }
 
-.code {
+.code-box {
     display: none;
-}
-
-.buttons {
-    margin: 20px 0;
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: left;
+    font-size: 16px;
+    white-space: pre;
 }
 
 button {
-    padding: 12px 26px;
+    padding: 12px 25px;
+    margin: 10px;
     font-size: 16px;
-    border: none;
     border-radius: 8px;
+    border: none;
     cursor: pointer;
-    margin: 0 10px;
 }
 
-.prev {
-    background: #6b7280;
-    color: #fff;
-}
+.run { background: #22c55e; }
+.next { background: #f97316; }
+.prev { background: #64748b; }
 
-.next {
-    background: #f97316;
-    color: #fff;
-}
-
-footer {
-    padding: 15px;
-    font-size: 14px;
-    color: #cbd5f5;
+.output {
+    margin-top: 15px;
+    color: #38bdf8;
 }
 </style>
+
+<script>
+let current = 0;
+
+function showCode(i) {
+    document.querySelectorAll('.code-box').forEach(c => c.style.display = 'none');
+    document.getElementById('code' + i).style.display = 'block';
+    document.getElementById('output').innerText = "";
+}
+
+function nextCode() {
+    if (current < 2) current++;
+    showCode(current);
+}
+
+function prevCode() {
+    if (current > 0) current--;
+    showCode(current);
+}
+
+function runFake() {
+    document.getElementById('output').innerText =
+        "Program executed.\nShow output to coordinator.";
+}
+
+window.onload = () => showCode(0);
+</script>
 </head>
 
 <body>
@@ -72,9 +93,9 @@ footer {
 <header>🐞 BUGBOOTH – Debug the Code 🐞</header>
 
 <div class="rules">
-⏱ Time: 15–20 Minutes &nbsp; | &nbsp;
-❌ No Internet Search &nbsp; | &nbsp;
-❌ No Mobile Phones &nbsp; | &nbsp;
+⏱ Time: 15–20 Minutes |
+❌ No Internet Search |
+❌ No Mobile Phones |
 ✅ Debug Only
 </div>
 
@@ -82,60 +103,42 @@ footer {
 
 <div class="container">
 
-<!-- BUG 1 -->
-<div class="code" style="display:block">
-   <div data-pym-src='https://www.jdoodle.com/embed/v1/2dbcfcbd332b27a1'></div>
+<div id="code0" class="code-box">
+nums = [1, 2, 3, 4, 5]
+
+for n in nums:
+    if n % 2 == 0:
+        nums.remove(n)
+
+print(nums)
 </div>
 
-<!-- BUG 2 -->
-<div class="code">
-  <div data-pym-src="https://www.jdoodle.com/embed/v1/1Qfm"></div>
-</div>
-
-<!-- BUG 3 -->
-<div class="code">
-  <div data-pym-src="https://www.jdoodle.com/embed/v1/1Qfn"></div>
-</div>
-
-</div>
-
-<div class="buttons">
-    <button class="prev" onclick="prevCode()">⬅ Previous</button>
-    <button class="next" onclick="nextCode()">Next ➡</button>
-</div>
-
-<footer>
-Show successful output to the coordinator
-</footer>
-
-<!-- JDoodle Script -->
-<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js"></script>
-
-<script>
-let current = 0;
-const codes = document.querySelectorAll(".code");
-
-function showCode(index) {
-    codes.forEach((c, i) => {
-        c.style.display = (i === index) ? "block" : "none";
-    });
+<div id="code1" class="code-box">
+student = {
+    "name": "Dheeraj",
+    "age": 21
 }
 
-function nextCode() {
-    if (current < codes.length - 1) {
-        current++;
-        showCode(current);
-    }
-}
+print(student["marks"])
+</div>
 
-function prevCode() {
-    if (current > 0) {
-        current--;
-        showCode(current);
-    }
-}
-</script>
+<div id="code2" class="code-box">
+def average(numbers):
+    total = 0
+    for n in numbers:
+        total += n
+        return total / len(numbers)
+
+print(average([10, 20, 30, 40]))
+</div>
+
+<button class="prev" onclick="prevCode()">← Previous</button>
+<button class="run" onclick="runFake()">Run</button>
+<button class="next" onclick="nextCode()">Next →</button>
+
+<div id="output" class="output"></div>
+
+</div>
 
 </body>
 </html>
-
