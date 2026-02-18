@@ -8,29 +8,36 @@
   body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0b1220;
+    background: #020617;
     color: white;
     text-align: center;
   }
 
-  h1 {
-    font-size: 42px;
-    margin-top: 30px;
-  }
+  h1 { font-size: 42px; margin-top: 30px; }
+  h2 { color: #38bdf8; }
 
-  h2 {
-    color: #38bdf8;
-  }
-
-  .rules {
-    font-size: 18px;
-    margin-top: 15px;
-    line-height: 1.7;
-  }
-
-  .page {
+  .screen {
     display: none;
-    margin-top: 25px;
+    padding: 30px;
+  }
+
+  .active {
+    display: block;
+  }
+
+  .btn {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: #22c55e;
+    color: black;
+    margin-top: 20px;
+  }
+
+  .btn:hover {
+    background: #16a34a;
   }
 
   iframe {
@@ -42,92 +49,134 @@
     background: white;
   }
 
-  button {
-    margin-top: 25px;
-    padding: 12px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #22c55e;
-    color: black;
+  .bug-box {
+    margin: 20px auto;
+    width: 80%;
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
   }
 
-  button:hover {
-    background: #16a34a;
-  }
-
-  footer {
-    margin: 40px 0 20px;
-    font-size: 14px;
-    opacity: 0.8;
+  #timer {
+    font-size: 22px;
+    color: #facc15;
+    margin-top: 10px;
   }
 </style>
 </head>
 
 <body>
 
-<!-- INTRO / RULES PAGE -->
-<div id="intro">
-  <h1>🐞 BUGBOOTH – Debug the Code</h1>
-
-  <div class="rules">
-    ⏱ Time: 15–20 Minutes <br>
-    ❌ No Internet Search <br>
-    ❌ No Mobile Phones <br>
-    ✅ Debug Only <br><br>
-    <b>Game will start automatically...</b>
-  </div>
+<!-- WELCOME -->
+<div id="welcome" class="screen active">
+  <h1>🐞 Welcome to BUGBOOTH</h1>
+  <p>The ultimate debugging challenge</p>
+  <button class="btn" onclick="showInstructions()">Start</button>
 </div>
 
-<!-- PAGE 1 -->
-<div id="page1" class="page">
+<!-- INSTRUCTIONS -->
+<div id="instructions" class="screen">
+  <h2>📜 Instructions</h2>
+  <p>
+    ⏱ Main Time: <b>10 Minutes</b><br>
+    ⏱ Extra Chance: <b>5 Minutes</b><br><br>
+    ❌ No Internet Search<br>
+    ❌ No Mobile Phones<br>
+    ✅ Debug Only<br><br>
+    You must identify the bug type and fix the code.
+  </p>
+  <button class="btn" onclick="startGame()">Enter BUGBOOTH</button>
+</div>
+
+<!-- LEVEL 1 -->
+<div id="level1" class="screen">
   <h2>Level 1 – Python Bug</h2>
-  <p>Fix the bug and run the code</p>
+  <div id="timer">Time Left: 15:00</div>
 
-  <!-- YOUR EMBED LINK ADDED HERE -->
-  <iframe 
-    src="https://onecompiler.com/embed/python/44dy8pgkw">
-  </iframe>
+  <div class="bug-box">
+    <b>Bug Type:</b> Logical Bug <br>
+    <b>Hint:</b> Function returns too early
+  </div>
 
-  <button onclick="goToPage(2)">Next Level ➡️</button>
+  <iframe src="https://onecompiler.com/embed/python/44dy8pgkw"></iframe>
+
+  <button class="btn" onclick="goLevel(2)">Next Level ➡️</button>
 </div>
 
-<!-- PAGE 2 -->
-<div id="page2" class="page">
-  <h2>Level 2 – Coming Soon</h2>
-  <p>Next buggy code will appear here</p>
+<!-- LEVEL 2 -->
+<!-- LEVEL 2 -->
+<div id="level2" class="screen">
+  <h2>Level 2 – Python Syntax Bug</h2>
 
-  <button onclick="goToPage(3)">Next Level ➡️</button>
+  <div class="bug-box">
+    <b>Bug Type:</b> Syntax Error <br>
+    <b>Hint:</b> Missing colon / indentation
+  </div>
+
+  <iframe src="https://onecompiler.com/embed/python/44dyycq4k"></iframe>
+
+  <button class="btn" onclick="goLevel(3)">Next Level ➡️</button>
 </div>
 
-<!-- PAGE 3 -->
-<div id="page3" class="page">
-  <h2>Final Level – Completed</h2>
-  <p>You have reached the end of BUGBOOTH</p>
 
-  <button onclick="finishGame()">Finish Game 🎉</button>
+<!-- LEVEL 3 -->
+<div id="level3" class="screen">
+  <h2>Level 3 – Python Runtime Bug</h2>
+
+  <div class="bug-box">
+    <b>Bug Type:</b> Runtime Error <br>
+    <b>Hint:</b> Division by zero
+  </div>
+
+  <iframe src="https://onecompiler.com/embed/python/44dyyka6d"></iframe>
+
+  <button class="btn" onclick="finish()">Finish Game 🎉</button>
 </div>
 
-<footer>
-  BUGBOOTH © Debugging Event
-</footer>
 
 <script>
-  // Auto start game after 3 seconds
-  setTimeout(() => {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("page1").style.display = "block";
-  }, 3000);
+let time = 900; // 15 minutes total
+let timerInterval;
 
-  function goToPage(pageNumber) {
-    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
-    document.getElementById("page" + pageNumber).style.display = "block";
-  }
+function showInstructions() {
+  switchScreen("welcome", "instructions");
+}
 
-  function finishGame() {
-    alert("🎉 Congratulations! You completed BUGBOOTH!");
-  }
+function startGame() {
+  switchScreen("instructions", "level1");
+  startTimer();
+}
+
+function goLevel(level) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById("level" + level).classList.add("active");
+}
+
+function switchScreen(from, to) {
+  document.getElementById(from).classList.remove("active");
+  document.getElementById(to).classList.add("active");
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
+    document.getElementById("timer").innerText =
+      `Time Left: ${min}:${sec < 10 ? "0" + sec : sec}`;
+
+    if (time === 300) alert("⚠️ Extra 5 minutes started!");
+    if (time === 0) {
+      clearInterval(timerInterval);
+      alert("⏱ Time Over! Game Ended");
+    }
+    time--;
+  }, 1000);
+}
+
+function finish() {
+  alert("🎉 BUGBOOTH Completed!");
+}
 </script>
 
 </body>
