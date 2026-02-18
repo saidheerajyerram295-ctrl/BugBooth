@@ -11,12 +11,10 @@
             color: #ffffff;
             text-align: center;
         }
-
         h1 {
             margin-top: 20px;
             color: #ff9800;
         }
-
         .rules {
             margin: 10px auto 20px;
             padding: 10px;
@@ -25,42 +23,14 @@
             border-radius: 8px;
             font-size: 16px;
         }
-
-        .compiler-container {
-            width: 95%;
-            margin: auto;
-            display: none;
-        }
-
         iframe {
-            width: 100%;
+            width: 95%;
             height: 500px;
             border: 2px solid #ff9800;
             border-radius: 8px;
         }
-
-        .nav-buttons {
-            margin: 20px;
-        }
-
-        button {
-            background: #ff9800;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            color: #000;
-        }
-
-        button:disabled {
-            background: #555;
-            cursor: not-allowed;
-        }
-
         footer {
-            margin-bottom: 20px;
+            margin: 20px;
             font-size: 14px;
             color: #aaa;
         }
@@ -68,35 +38,22 @@
 </head>
 <body>
 
-    <h1>🐞 BUGBOOTH – Debug the Code 🐞</h1>
+<h1>🐞 BUGBOOTH – Debug the Code 🐞</h1>
 
-    <div class="rules">
-        ⏱ Time: 15–20 Minutes |
-        ❌ No Internet Search |
-        ❌ No Mobile Phones |
-        ✅ Debug Only
-    </div>
+<div class="rules">
+    ⏱ Time: 15–20 Minutes |
+    ❌ No Internet Search |
+    ❌ No Mobile Phones |
+    ✅ Debug Only
+</div>
 
-    <!-- Question 1 -->
-    <div class="compiler-container">
-        <iframe 
-            src="https://onecompiler.com/embed/python?code=%23%20Python%20program%20to%20add%20two%20numbers%0Anum1%20%3D%2018%0Anum2%20%3D%207%0A%0A%23%20Adding%20two%20numbers%0Asum%20%3D%20num1%20%2B%20num2%0A%0A%23%20Printing%20the%20result%20using%20an%20f-string%0Aprint(f%22Sum%20of%20%7Bnum1%7D%20and%20%7Bnum2%7D%20is%20%7Bsum%7D%22)">
-        </iframe>
-    </div>
+<iframe
+src="https://onecompiler.com/embed/python?code=%23%20Python%20program%20to%20add%20two%20numbers%0Anum1%20%3D%2018%0Anum2%20%3D%207%0A%0A%23%20Adding%20two%20numbers%0Asum%20%3D%20num1%20%2B%20num2%0A%0A%23%20Printing%20the%20result%20using%20an%20f-string%0Aprint%28f%22Sum%20of%20%7Bnum1%7D%20and%20%7Bnum2%7D%20is%20%7Bsum%7D%22%29&v=2">
+</iframe>
 
-    <div class="nav-buttons">
-        <button id="prevBtn" disabled>⬅ Previous</button>
-        <button id="nextBtn" disabled>Next ➡</button>
-    </div>
-
-    <footer>
-        Debug logical errors only • BUGBOOTH Event
-    </footer>
-
-    <script>
-        const question = document.querySelector(".compiler-container");
-        question.style.display = "block";
-    </script>
+<footer>
+    Debug logical errors only • BUGBOOTH Event
+</footer>
 
 </body>
 </html>
