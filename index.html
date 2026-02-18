@@ -9,7 +9,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: radial-gradient(circle at top, #0b1630, #020617);
-    color: #fff;
+    color: #ffffff;
     text-align: center;
 }
 
@@ -21,7 +21,7 @@ header {
 
 .rules {
     background: rgba(255,255,255,0.08);
-    margin: 0 auto 25px;
+    margin: 10px auto 25px;
     padding: 14px;
     border-radius: 12px;
     width: 90%;
@@ -32,12 +32,8 @@ header {
     margin: auto;
 }
 
-iframe {
-    width: 100%;
-    height: 520px;
-    border: none;
-    border-radius: 10px;
-    background: #fff;
+.code {
+    display: none;
 }
 
 .buttons {
@@ -86,4 +82,59 @@ footer {
 
 <div class="container">
 
-<!-- CODE 1 -
+<!-- BUG 1 -->
+<div class="code" style="display:block">
+  <div data-pym-src="https://www.jdoodle.com/embed/v1/1Qfk"></div>
+</div>
+
+<!-- BUG 2 -->
+<div class="code">
+  <div data-pym-src="https://www.jdoodle.com/embed/v1/1Qfm"></div>
+</div>
+
+<!-- BUG 3 -->
+<div class="code">
+  <div data-pym-src="https://www.jdoodle.com/embed/v1/1Qfn"></div>
+</div>
+
+</div>
+
+<div class="buttons">
+    <button class="prev" onclick="prevCode()">⬅ Previous</button>
+    <button class="next" onclick="nextCode()">Next ➡</button>
+</div>
+
+<footer>
+Show successful output to the coordinator
+</footer>
+
+<!-- JDoodle Script -->
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js"></script>
+
+<script>
+let current = 0;
+const codes = document.querySelectorAll(".code");
+
+function showCode(index) {
+    codes.forEach((c, i) => {
+        c.style.display = (i === index) ? "block" : "none";
+    });
+}
+
+function nextCode() {
+    if (current < codes.length - 1) {
+        current++;
+        showCode(current);
+    }
+}
+
+function prevCode() {
+    if (current > 0) {
+        current--;
+        showCode(current);
+    }
+}
+</script>
+
+</body>
+</html>
