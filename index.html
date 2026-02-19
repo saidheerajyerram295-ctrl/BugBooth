@@ -1,73 +1,82 @@
-import time
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BUGBOOTH – Debug the Code</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .box {
+            background: #1e293b;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            width: 80%;
+            display: none;
+        }
+        pre {
+            background: #020617;
+            padding: 15px;
+            text-align: left;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            background: #38bdf8;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .output {
+            color: #22c55e;
+            font-weight: bold;
+        }
+        .bug {
+            color: orange;
+        }
+        #timer {
+            font-size: 20px;
+            color: yellow;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
 
-GAME_TIME = 600  # 10 minutes in seconds
-start_time = None
+<h1>🐞 BUGBOOTH – Debug the Code 🐞</h1>
+<div id="timer">Time Left: 10:00</div>
 
+<!-- HOME -->
+<div id="home" class="box" style="display:block;">
+    <h2>Welcome to BUGBOOTH</h2>
+    <p>Find the bug and compare the output with the correct output.</p>
+    <button onclick="showInstructions()">Next</button>
+</div>
 
-def timer_remaining():
-    elapsed = int(time.time() - start_time)
-    remaining = GAME_TIME - elapsed
-    if remaining <= 0:
-        print("\n⏰ TIME UP! Game Over.")
-        exit()
-    minutes = remaining // 60
-    seconds = remaining % 60
-    print(f"⏳ Time Left: {minutes}m {seconds}s")
+<!-- INSTRUCTIONS -->
+<div id="instructions" class="box">
+    <h2>Instructions</h2>
+    <p>• Each level contains a Python bug.<br>
+       • Open the code link.<br>
+       • Identify the mistake.<br>
+       • Compare with correct output.<br>
+       • Total Time: 10 Minutes.</p>
+    <button onclick="startGame()">Start Game</button>
+</div>
 
+<!-- LEVEL 1 -->
+<div id="level1" class="box">
+    <h2>LEVEL 1 – HARD</h2>
+    <p><b>Question:</b> Count failed students. Marks below 40 are fail.</p>
+    <p class="bug"><b>Bug Type:</b> Logical condition mistake.</p>
 
-def home_page():
-    print("=" * 40)
-    print("🐞 WELCOME TO BUGBOOTH 🐞")
-    print("=" * 40)
-    print("1. Instructions")
-    print("2. Start Game")
-    print("3. Exit")
-    choice = input("Enter choice: ")
-
-    if choice == "1":
-        instructions()
-    elif choice == "2":
-        start_game()
-    else:
-        exit()
-
-
-def instructions():
-    print("\n📜 INSTRUCTIONS")
-    print("- Find the bug in the code")
-    print("- Compare output with correct output")
-    print("- Bug may be logical, not syntax")
-    print("- Total Time: 10 minutes")
-    print("- Press ENTER to move to next level")
-    input("\nPress ENTER to start the game...")
-    start_game()
-
-
-def start_game():
-    global start_time
-    start_time = time.time()
-    level_1()
-    level_2()
-    level_3()
-    print("\n🎉 CONGRATULATIONS! You completed BUGBOOTH 🎉")
-
-
-# ===============================
-# LEVEL 1 – HARD
-# ===============================
-def level_1():
-    print("\n" + "=" * 40)
-    print("LEVEL 1 – HARD")
-    timer_remaining()
-
-    print("""
-Question:
-Count failed students.
-Rule: Marks below 40 are fail.
-Bug Type: Logical condition mistake
-""")
-
-    print("""
+    <pre>
 def count_failed(marks):
     failed = 0
     for m in marks:
@@ -77,27 +86,24 @@ def count_failed(marks):
 
 scores = [35, 40, 55, 60, 20]
 print(count_failed(scores))
-""")
+    </pre>
 
-    print("Correct Output: 2")
-    input("\nPress ENTER for NEXT LEVEL...")
+    <p>👉 Open Code:  
+    <a href="https://onecompiler.com/embed/python/44e43e2gb" target="_blank">
+    Click Here</a></p>
 
+    <p class="output">Correct Output: 2</p>
 
-# ===============================
-# LEVEL 2 – VERY HARD
-# ===============================
-def level_2():
-    print("\n" + "=" * 40)
-    print("LEVEL 2 – VERY HARD")
-    timer_remaining()
+    <button onclick="nextLevel(1)">Next Level</button>
+</div>
 
-    print("""
-Question:
-Find minimum value from a list.
-Bug Type: Wrong initialization
-""")
+<!-- LEVEL 2 -->
+<div id="level2" class="box">
+    <h2>LEVEL 2 – VERY HARD</h2>
+    <p><b>Question:</b> Find minimum value from positive numbers.</p>
+    <p class="bug"><b>Bug Type:</b> Wrong initialization.</p>
 
-    print("""
+    <pre>
 def find_min(nums):
     minimum = 0   # BUG
     for n in nums:
@@ -107,27 +113,24 @@ def find_min(nums):
 
 values = [5, 8, 12, 20]
 print(find_min(values))
-""")
+    </pre>
 
-    print("Correct Output: 5")
-    input("\nPress ENTER for NEXT LEVEL...")
+    <p>👉 Open Code:  
+    <a href="https://onecompiler.com/embed/python/44e446ucu" target="_blank">
+    Click Here</a></p>
 
+    <p class="output">Correct Output: 5</p>
 
-# ===============================
-# LEVEL 3 – EXTREME HARD
-# ===============================
-def level_3():
-    print("\n" + "=" * 40)
-    print("LEVEL 3 – EXTREME HARD")
-    timer_remaining()
+    <button onclick="nextLevel(2)">Next Level</button>
+</div>
 
-    print("""
-Question:
-Calculate percentage of marks.
-Bug Type: Operator precision loss
-""")
+<!-- LEVEL 3 -->
+<div id="level3" class="box">
+    <h2>LEVEL 3 – EXTREME HARD</h2>
+    <p><b>Question:</b> Calculate percentage of marks.</p>
+    <p class="bug"><b>Bug Type:</b> Operator precision loss.</p>
 
-    print("""
+    <pre>
 def calculate_percentage(total, obtained):
     if total == 0:
         return 0
@@ -135,11 +138,55 @@ def calculate_percentage(total, obtained):
     return percentage
 
 print(calculate_percentage(600, 455))
-""")
+    </pre>
 
-    print("Correct Output: 75.83")
-    input("\nPress ENTER to FINISH...")
+    <p>👉 Open Code:  
+    <a href="https://onecompiler.com/embed/python/44e449vyu" target="_blank">
+    Click Here</a></p>
 
+    <p class="output">Correct Output: 75.83</p>
 
-# ===== PROGRAM START =====
-home_page()
+    <button onclick="finishGame()">Finish</button>
+</div>
+
+<script>
+let totalTime = 600;
+let timerInterval;
+
+function startTimer() {
+    timerInterval = setInterval(function() {
+        let minutes = Math.floor(totalTime / 60);
+        let seconds = totalTime % 60;
+        document.getElementById("timer").innerHTML =
+            "Time Left: " + minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+        totalTime--;
+        if (totalTime < 0) {
+            clearInterval(timerInterval);
+            alert("⏰ Time Up! Game Over.");
+        }
+    }, 1000);
+}
+
+function showInstructions() {
+    document.getElementById("home").style.display = "none";
+    document.getElementById("instructions").style.display = "block";
+}
+
+function startGame() {
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("level1").style.display = "block";
+    startTimer();
+}
+
+function nextLevel(current) {
+    document.getElementById("level" + current).style.display = "none";
+    document.getElementById("level" + (current + 1)).style.display = "block";
+}
+
+function finishGame() {
+    alert("🎉 Congratulations! You completed BUGBOOTH!");
+}
+</script>
+
+</body>
+</html>
