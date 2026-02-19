@@ -1,183 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>BUGBOOTH – Debug the Code</title>
-
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #020617;
-    color: white;
-    text-align: center;
-  }
-
-  h1 { font-size: 42px; margin-top: 30px; }
-  h2 { color: #38bdf8; }
-
-  .screen {
-    display: none;
-    padding: 30px;
-  }
-
-  .active {
-    display: block;
-  }
-
-  .btn {
-    padding: 12px 30px;
-    font-size: 18px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background: #22c55e;
-    color: black;
-    margin-top: 20px;
-  }
-
-  .btn:hover {
-    background: #16a34a;
-  }
-
-  iframe {
-    width: 90%;
-    height: 420px;
-    border: none;
-    border-radius: 12px;
-    margin-top: 15px;
-    background: white;
-  }
-
-  .bug-box {
-    margin: 20px auto;
-    width: 80%;
-    background: #0f172a;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: left;
-  }
-
-  #timer {
-    font-size: 22px;
-    color: #facc15;
-    margin-top: 10px;
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>BUGBOOTH – Debug the Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #38bdf8;
+        }
+        .level {
+            background: #1e293b;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        pre {
+            background: #020617;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            color: #f8fafc;
+        }
+        .output {
+            color: #22c55e;
+            font-weight: bold;
+        }
+        .bug {
+            color: #f97316;
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- WELCOME -->
-<div id="welcome" class="screen active">
-  <h1>🐞 Welcome to BUGBOOTH</h1>
-  <p>The ultimate debugging challenge</p>
-  <button class="btn" onclick="showInstructions()">Start</button>
-</div>
-
-<!-- INSTRUCTIONS -->
-<div id="instructions" class="screen">
-  <h2>📜 Instructions</h2>
-  <p>
-    ⏱ Main Time: <b>10 Minutes</b><br>
-    ⏱ Extra Chance: <b>5 Minutes</b><br><br>
-    ❌ No Internet Search<br>
-    ❌ No Mobile Phones<br>
-    ✅ Debug Only<br><br>
-    You must identify the bug type and fix the code.
-  </p>
-  <button class="btn" onclick="startGame()">Enter BUGBOOTH</button>
-</div>
+<h1>🐞 BUGBOOTH – Debug the Code 🐞</h1>
 
 <!-- LEVEL 1 -->
-<div id="level1" class="screen">
-  <h2>Level 1 – Python Bug</h2>
-  <div id="timer">Time Left: 15:00</div>
+<div class="level">
+    <h2>LEVEL 1 – HARD</h2>
+    <p><b>Question:</b>  
+    A student list contains marks.  
+    Count how many students <b>failed</b>.  
+    <br><b>Rule:</b> Marks <b>below 40</b> are fail.</p>
 
-  <div class="bug-box">
-    <b>Bug Type:</b> Logical Bug <br>
-    <b>Hint:</b> Function returns too early
-  </div>
+    <p class="bug"><b>Bug Hint:</b> Logical mistake in condition.</p>
 
-  <iframe src="https://onecompiler.com/embed/python/44dy8pgkw"></iframe>
+    <pre>
+def count_failed(marks):
+    failed = 0
+    for m in marks:
+        if m <= 40:   # BUG
+            failed += 1
+    return failed
 
-  <button class="btn" onclick="goLevel(2)">Next Level ➡️</button>
+scores = [35, 40, 55, 60, 20]
+print("Failed students:", count_failed(scores))
+    </pre>
+
+    <p class="output">Correct Output: Failed students: 2</p>
 </div>
 
 <!-- LEVEL 2 -->
-<!-- LEVEL 2 -->
-<div id="level2" class="screen">
-  <h2>Level 2 – Python Syntax Bug</h2>
+<div class="level">
+    <h2>LEVEL 2 – VERY HARD</h2>
+    <p><b>Question:</b>  
+    Find the minimum value from a list of positive numbers.</p>
 
-  <div class="bug-box">
-    <b>Bug Type:</b> Syntax Error <br>
-    <b>Hint:</b> Missing colon / indentation
-  </div>
+    <p class="bug"><b>Bug Hint:</b> Wrong initial value used.</p>
 
-  <iframe src="https://onecompiler.com/embed/python/44dyycq4k"></iframe>
+    <pre>
+def find_min(nums):
+    minimum = 0   # BUG
+    for n in nums:
+        if n < minimum:
+            minimum = n
+    return minimum
 
-  <button class="btn" onclick="goLevel(3)">Next Level ➡️</button>
+values = [5, 8, 12, 20]
+print("Minimum value:", find_min(values))
+    </pre>
+
+    <p class="output">Correct Output: Minimum value: 5</p>
 </div>
-
 
 <!-- LEVEL 3 -->
-<div id="level3" class="screen">
-  <h2>Level 3 – Python Runtime Bug</h2>
+<div class="level">
+    <h2>LEVEL 3 – EXTREME HARD</h2>
+    <p><b>Question:</b>  
+    Calculate percentage of marks obtained by a student.</p>
 
-  <div class="bug-box">
-    <b>Bug Type:</b> Runtime Error <br>
-    <b>Hint:</b> Division by zero
-  </div>
+    <p class="bug"><b>Bug Hint:</b> Operator mistake causes precision loss.</p>
 
-  <iframe src="https://onecompiler.com/embed/python/44dyyka6d"></iframe>
+    <pre>
+def calculate_percentage(total, obtained):
+    if total == 0:
+        return 0
+    percentage = (obtained * 100) // total   # BUG
+    return percentage
 
-  <button class="btn" onclick="finish()">Finish Game 🎉</button>
+total_marks = 600
+obtained_marks = 455
+print("Percentage:", calculate_percentage(total_marks, obtained_marks))
+    </pre>
+
+    <p class="output">Correct Output: Percentage: 75.83</p>
 </div>
-
-
-<script>
-let time = 900; // 15 minutes total
-let timerInterval;
-
-function showInstructions() {
-  switchScreen("welcome", "instructions");
-}
-
-function startGame() {
-  switchScreen("instructions", "level1");
-  startTimer();
-}
-
-function goLevel(level) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById("level" + level).classList.add("active");
-}
-
-function switchScreen(from, to) {
-  document.getElementById(from).classList.remove("active");
-  document.getElementById(to).classList.add("active");
-}
-
-function startTimer() {
-  timerInterval = setInterval(() => {
-    let min = Math.floor(time / 60);
-    let sec = time % 60;
-    document.getElementById("timer").innerText =
-      `Time Left: ${min}:${sec < 10 ? "0" + sec : sec}`;
-
-    if (time === 300) alert("⚠️ Extra 5 minutes started!");
-    if (time === 0) {
-      clearInterval(timerInterval);
-      alert("⏱ Time Over! Game Ended");
-    }
-    time--;
-  }, 1000);
-}
-
-function finish() {
-  alert("🎉 BUGBOOTH Completed!");
-}
-</script>
 
 </body>
 </html>
