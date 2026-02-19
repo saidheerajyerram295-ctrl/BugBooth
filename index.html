@@ -1,80 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>BUGBOOTH – Debug the Code</title>
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             background: #0f172a;
-            color: white;
-            text-align: center;
+            color: #e5e7eb;
             padding: 20px;
         }
-        .box {
+        h1 {
+            text-align: center;
+            color: #38bdf8;
+        }
+        .level {
             background: #1e293b;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 10px;
-            width: 80%;
-            display: none;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
         }
         pre {
             background: #020617;
-            padding: 15px;
-            text-align: left;
+            padding: 12px;
+            border-radius: 6px;
             overflow-x: auto;
-        }
-        button {
-            padding: 10px 20px;
-            margin-top: 15px;
-            background: #38bdf8;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
+            color: #f8fafc;
         }
         .output {
             color: #22c55e;
             font-weight: bold;
         }
         .bug {
-            color: orange;
-        }
-        #timer {
-            font-size: 20px;
-            color: yellow;
-            margin-bottom: 15px;
+            color: #f97316;
         }
     </style>
 </head>
 <body>
 
 <h1>🐞 BUGBOOTH – Debug the Code 🐞</h1>
-<div id="timer">Time Left: 10:00</div>
-
-<!-- HOME -->
-<div id="home" class="box" style="display:block;">
-    <h2>Welcome to BUGBOOTH</h2>
-    <p>Find the bug and compare the output with the correct output.</p>
-    <button onclick="showInstructions()">Next</button>
-</div>
-
-<!-- INSTRUCTIONS -->
-<div id="instructions" class="box">
-    <h2>Instructions</h2>
-    <p>• Each level contains a Python bug.<br>
-       • Open the code link.<br>
-       • Identify the mistake.<br>
-       • Compare with correct output.<br>
-       • Total Time: 10 Minutes.</p>
-    <button onclick="startGame()">Start Game</button>
-</div>
 
 <!-- LEVEL 1 -->
-<div id="level1" class="box">
+<div class="level">
     <h2>LEVEL 1 – HARD</h2>
-    <p><b>Question:</b> Count failed students. Marks below 40 are fail.</p>
-    <p class="bug"><b>Bug Type:</b> Logical condition mistake.</p>
+    <p><b>Question:</b>  
+    A student list contains marks.  
+    Count how many students <b>failed</b>.  
+    <br><b>Rule:</b> Marks <b>below 40</b> are fail.</p>
+
+    <p class="bug"><b>Bug Hint:</b> Logical mistake in condition.</p>
 
     <pre>
 def count_failed(marks):
@@ -85,23 +59,19 @@ def count_failed(marks):
     return failed
 
 scores = [35, 40, 55, 60, 20]
-print(count_failed(scores))
+print("Failed students:", count_failed(scores))
     </pre>
 
-    <p>👉 Open Code:  
-    <a href="https://onecompiler.com/embed/python/44e43e2gb" target="_blank">
-    Click Here</a></p>
-
-    <p class="output">Correct Output: 2</p>
-
-    <button onclick="nextLevel(1)">Next Level</button>
+    <p class="output">Correct Output: Failed students: 2</p>
 </div>
 
 <!-- LEVEL 2 -->
-<div id="level2" class="box">
+<div class="level">
     <h2>LEVEL 2 – VERY HARD</h2>
-    <p><b>Question:</b> Find minimum value from positive numbers.</p>
-    <p class="bug"><b>Bug Type:</b> Wrong initialization.</p>
+    <p><b>Question:</b>  
+    Find the minimum value from a list of positive numbers.</p>
+
+    <p class="bug"><b>Bug Hint:</b> Wrong initial value used.</p>
 
     <pre>
 def find_min(nums):
@@ -112,23 +82,19 @@ def find_min(nums):
     return minimum
 
 values = [5, 8, 12, 20]
-print(find_min(values))
+print("Minimum value:", find_min(values))
     </pre>
 
-    <p>👉 Open Code:  
-    <a href="https://onecompiler.com/embed/python/44e446ucu" target="_blank">
-    Click Here</a></p>
-
-    <p class="output">Correct Output: 5</p>
-
-    <button onclick="nextLevel(2)">Next Level</button>
+    <p class="output">Correct Output: Minimum value: 5</p>
 </div>
 
 <!-- LEVEL 3 -->
-<div id="level3" class="box">
+<div class="level">
     <h2>LEVEL 3 – EXTREME HARD</h2>
-    <p><b>Question:</b> Calculate percentage of marks.</p>
-    <p class="bug"><b>Bug Type:</b> Operator precision loss.</p>
+    <p><b>Question:</b>  
+    Calculate percentage of marks obtained by a student.</p>
+
+    <p class="bug"><b>Bug Hint:</b> Operator mistake causes precision loss.</p>
 
     <pre>
 def calculate_percentage(total, obtained):
@@ -137,56 +103,13 @@ def calculate_percentage(total, obtained):
     percentage = (obtained * 100) // total   # BUG
     return percentage
 
-print(calculate_percentage(600, 455))
+total_marks = 600
+obtained_marks = 455
+print("Percentage:", calculate_percentage(total_marks, obtained_marks))
     </pre>
 
-    <p>👉 Open Code:  
-    <a href="https://onecompiler.com/embed/python/44e449vyu" target="_blank">
-    Click Here</a></p>
-
-    <p class="output">Correct Output: 75.83</p>
-
-    <button onclick="finishGame()">Finish</button>
+    <p class="output">Correct Output: Percentage: 75.83</p>
 </div>
-
-<script>
-let totalTime = 600;
-let timerInterval;
-
-function startTimer() {
-    timerInterval = setInterval(function() {
-        let minutes = Math.floor(totalTime / 60);
-        let seconds = totalTime % 60;
-        document.getElementById("timer").innerHTML =
-            "Time Left: " + minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
-        totalTime--;
-        if (totalTime < 0) {
-            clearInterval(timerInterval);
-            alert("⏰ Time Up! Game Over.");
-        }
-    }, 1000);
-}
-
-function showInstructions() {
-    document.getElementById("home").style.display = "none";
-    document.getElementById("instructions").style.display = "block";
-}
-
-function startGame() {
-    document.getElementById("instructions").style.display = "none";
-    document.getElementById("level1").style.display = "block";
-    startTimer();
-}
-
-function nextLevel(current) {
-    document.getElementById("level" + current).style.display = "none";
-    document.getElementById("level" + (current + 1)).style.display = "block";
-}
-
-function finishGame() {
-    alert("🎉 Congratulations! You completed BUGBOOTH!");
-}
-</script>
 
 </body>
 </html>
