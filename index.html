@@ -1,56 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BUGBOOTH – Debug the Code</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: #e5e7eb;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #38bdf8;
-        }
-        .level {
-            background: #1e293b;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-        pre {
-            background: #020617;
-            padding: 12px;
-            border-radius: 6px;
-            overflow-x: auto;
-            color: #f8fafc;
-        }
-        .output {
-            color: #22c55e;
-            font-weight: bold;
-        }
-        .bug {
-            color: #f97316;
-        }
-    </style>
-</head>
-<body>
+import time
 
-<h1>🐞 BUGBOOTH – Debug the Code 🐞</h1>
+GAME_TIME = 600  # 10 minutes in seconds
+start_time = None
 
-<!-- LEVEL 1 -->
-<div class="level">
-    <h2>LEVEL 1 – HARD</h2>
-    <p><b>Question:</b>  
-    A student list contains marks.  
-    Count how many students <b>failed</b>.  
-    <br><b>Rule:</b> Marks <b>below 40</b> are fail.</p>
 
-    <p class="bug"><b>Bug Hint:</b> Logical mistake in condition.</p>
+def timer_remaining():
+    elapsed = int(time.time() - start_time)
+    remaining = GAME_TIME - elapsed
+    if remaining <= 0:
+        print("\n⏰ TIME UP! Game Over.")
+        exit()
+    minutes = remaining // 60
+    seconds = remaining % 60
+    print(f"⏳ Time Left: {minutes}m {seconds}s")
 
-    <pre>
+
+def home_page():
+    print("=" * 40)
+    print("🐞 WELCOME TO BUGBOOTH 🐞")
+    print("=" * 40)
+    print("1. Instructions")
+    print("2. Start Game")
+    print("3. Exit")
+    choice = input("Enter choice: ")
+
+    if choice == "1":
+        instructions()
+    elif choice == "2":
+        start_game()
+    else:
+        exit()
+
+
+def instructions():
+    print("\n📜 INSTRUCTIONS")
+    print("- Find the bug in the code")
+    print("- Compare output with correct output")
+    print("- Bug may be logical, not syntax")
+    print("- Total Time: 10 minutes")
+    print("- Press ENTER to move to next level")
+    input("\nPress ENTER to start the game...")
+    start_game()
+
+
+def start_game():
+    global start_time
+    start_time = time.time()
+    level_1()
+    level_2()
+    level_3()
+    print("\n🎉 CONGRATULATIONS! You completed BUGBOOTH 🎉")
+
+
+# ===============================
+# LEVEL 1 – HARD
+# ===============================
+def level_1():
+    print("\n" + "=" * 40)
+    print("LEVEL 1 – HARD")
+    timer_remaining()
+
+    print("""
+Question:
+Count failed students.
+Rule: Marks below 40 are fail.
+Bug Type: Logical condition mistake
+""")
+
+    print("""
 def count_failed(marks):
     failed = 0
     for m in marks:
@@ -59,21 +76,28 @@ def count_failed(marks):
     return failed
 
 scores = [35, 40, 55, 60, 20]
-print("Failed students:", count_failed(scores))
-    </pre>
+print(count_failed(scores))
+""")
 
-    <p class="output">Correct Output: Failed students: 2</p>
-</div>
+    print("Correct Output: 2")
+    input("\nPress ENTER for NEXT LEVEL...")
 
-<!-- LEVEL 2 -->
-<div class="level">
-    <h2>LEVEL 2 – VERY HARD</h2>
-    <p><b>Question:</b>  
-    Find the minimum value from a list of positive numbers.</p>
 
-    <p class="bug"><b>Bug Hint:</b> Wrong initial value used.</p>
+# ===============================
+# LEVEL 2 – VERY HARD
+# ===============================
+def level_2():
+    print("\n" + "=" * 40)
+    print("LEVEL 2 – VERY HARD")
+    timer_remaining()
 
-    <pre>
+    print("""
+Question:
+Find minimum value from a list.
+Bug Type: Wrong initialization
+""")
+
+    print("""
 def find_min(nums):
     minimum = 0   # BUG
     for n in nums:
@@ -82,34 +106,40 @@ def find_min(nums):
     return minimum
 
 values = [5, 8, 12, 20]
-print("Minimum value:", find_min(values))
-    </pre>
+print(find_min(values))
+""")
 
-    <p class="output">Correct Output: Minimum value: 5</p>
-</div>
+    print("Correct Output: 5")
+    input("\nPress ENTER for NEXT LEVEL...")
 
-<!-- LEVEL 3 -->
-<div class="level">
-    <h2>LEVEL 3 – EXTREME HARD</h2>
-    <p><b>Question:</b>  
-    Calculate percentage of marks obtained by a student.</p>
 
-    <p class="bug"><b>Bug Hint:</b> Operator mistake causes precision loss.</p>
+# ===============================
+# LEVEL 3 – EXTREME HARD
+# ===============================
+def level_3():
+    print("\n" + "=" * 40)
+    print("LEVEL 3 – EXTREME HARD")
+    timer_remaining()
 
-    <pre>
+    print("""
+Question:
+Calculate percentage of marks.
+Bug Type: Operator precision loss
+""")
+
+    print("""
 def calculate_percentage(total, obtained):
     if total == 0:
         return 0
     percentage = (obtained * 100) // total   # BUG
     return percentage
 
-total_marks = 600
-obtained_marks = 455
-print("Percentage:", calculate_percentage(total_marks, obtained_marks))
-    </pre>
+print(calculate_percentage(600, 455))
+""")
 
-    <p class="output">Correct Output: Percentage: 75.83</p>
-</div>
+    print("Correct Output: 75.83")
+    input("\nPress ENTER to FINISH...")
 
-</body>
-</html>
+
+# ===== PROGRAM START =====
+home_page()
